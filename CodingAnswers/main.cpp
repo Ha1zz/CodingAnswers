@@ -74,19 +74,20 @@ vector<char> keyPad[] = { {},{},
 	{ 't','u','v' },	
 	{ 'w','x','y','z' } };
 
-string ReturnLetterFrNumber(vector<char>keyPad[], int input[],string word,int index, int n)
+void ReturnLetterFrNumber(vector<char>keyPad[], int theNumber[],string words,int index, int n)
 {
 	if (index == n)
 	{
+		cout << words << " ";
 		return;
 	}
 
-	int digit = input[index];
+	int digit = theNumber[index];
 	int length = keyPad[digit].size();
 
 	for (int i = 0; i < length; i++)
 	{
-		ReturnLetterFrNumber(keyPad, input, word + keyPad[digit][i], index + 1, n);
+		ReturnLetterFrNumber(keyPad, theNumber, words + keyPad[digit][i], index + 1, n);
 	}
 }
 
@@ -105,7 +106,18 @@ int main()
 	//cout << "Number Convert To Word: " << answerWord;
 
 	//ANSWER 3
+	int numberLength = 0;
 
-	
+	cout << "Please enter how many number you want to enter" << endl;
+	cin >> numberLength;
+
+	int* input = new int(numberLength);
+	for (int i = 0; i < numberLength; i++)
+	{
+		cout << "Please enter number: " << i + 1 << endl;
+		cin >> input[i];
+	}
+
+	ReturnLetterFrNumber(keyPad, input, string(""), 0, numberLength);	
 	return 0;
 }
